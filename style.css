@@ -1,0 +1,45 @@
+*{
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: monospace;
+}
+
+h1{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 7rem;
+}
+
+.game{
+    background-color: rgb(241, 174, 119);
+}
+
+.card{
+    display: inline-block;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 25px;
+    font-size: 40px;
+    height: 100px;
+    width: 20%;
+    margin: 20px;
+    border-radius: 10px;
+    border: 5px solid rgb(255, 252, 62);
+    background-color: rgb(241, 239, 239);
+    background-image: ;
+  }
+
+  .selected{
+      border: solid 10px rgb(206, 14, 24);
+      transform: rotateY(180deg);
+  }
+
+  .match{
+      border: rgb(0, 238, 247) solid 10px;
+  }
+  
+
+/* need to use transform rotateY to flip the cards 
+use active: for when a card is clicked*/
