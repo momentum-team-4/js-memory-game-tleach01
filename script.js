@@ -1,70 +1,66 @@
-// cards to flip when clicked, use toggle
-
-// cards to lock when matched
-
-// shuffle cards on load/restart - random number in math
-// - restart button & levels
-
-// eventListener
-
-// display timer
-
-// congrats after all cards are matched
+// setting up the card values & images
 
 const cardsArray = [
   {
     name: 'psu',
-    image: 'images/psulogo.jpeg'
+    image: 'images/psumascot.jpeg'
   },
   {
     name: 'psu',
-    image: 'images/psulogo.jpeg'
+    image: 'images/psumascot.jpeg'
   },
   {
     name: 'osu',
-    image: 'images/ohiostatelogo.png'
+    image: 'images/ohiohead.jpg'
   },
   {
     name: 'osu',
-    image: 'images/ohiostatelogo.png'
+    image: 'images/ohiohead.jpg'
   },
   {
     name: 'bama',
-    image: 'images/bamalogo.jpg'
+    image: 'images/bamahead.jpg'
   },
   {
     name: 'bama',
-    image: 'images/bamalogo.jpg'
+    image: 'images/bamahead.jpg'
   },
   {
     name: 'georgia',
-    image: 'images/georgialogo.png'
+    image: 'images/georgiahead.jpg'
   },
   {
     name: 'georgia',
-    image: 'images/georgialogo.png'
+    image: 'images/georgiahead.jpg'
   },
   {
     name: 'lsu',
-    image: 'images/lsulogo.png'
+    image: 'images/lsuhead.jpg'
   },
   {
     name: 'lsu',
-    image: 'images/lsulogo.png'
+    image: 'images/lsuhead.jpg'
   },
   {
-    name: 'michst',
-    image: 'images/michstlogo.gif'
+    name: 'oregon',
+    image: 'images/oregonhead.jpg'
   },
   {
-    name: 'michst',
-    image: 'images/michstlogo.gif'
+    name: 'oregon',
+    image: 'images/oregonhead.jpg'
   }
 ]
 
 const game = document.querySelector('.game')
-const timer = document.querySelector('.timer')
 const layout = document.createElement('section')
+game.appendChild(layout)
+
+// start new game button function
+function refreshPage () {
+  location.reload()
+}
+
+// shuffle cards when page loads
 
 function shuffle (cardsArray) {
   for (let i = cardsArray.length - 1; i > 0; i--) {
@@ -75,42 +71,29 @@ function shuffle (cardsArray) {
   }
   return cardsArray
 }
-
 shuffle(cardsArray)
 
-game.appendChild(layout)
+// display cards from array on page
+// added front and back classes for when selected
 
 cardsArray.forEach((item) => {
   const card = document.createElement('div')
   card.classList.add('card')
   card.dataset.name = item.name
-  //   card.style.backgroundImage = item.image
+
+  const front = document.createElement('div')
+  front.classList.add('front')
+
+  const back = document.createElement('div')
+  back.classList.add('back')
+  back.style.backgroundImage = 'url(' + item.image + ')'
+
   layout.appendChild(card)
-  card.innerHTML = '<i class="fas fa-football-ball"></i>'
+  card.appendChild(front)
+  card.appendChild(back)
 })
 
-game.addEventListener('click', function (event) {
-  const clicked = event.target
-  if (count < 2) {
-    count++
-    if (count === 1) {
-      firstClick = clicked.dataset.name
-      clicked.classList.add('selected')
-    } else {
-      secondClick = clicked.dataset.name
-      clicked.classList.add('selected')
-    }
-    if (firstClick !== '' && secondClick !== '') {
-      if (firstClick === secondClick) {
-        match()
-      }
-    }
-  }
-})
-
-let count = 0
-let firstClick = ''
-let secondClick = ''
+// when cards match to put a class of match on so the correct css is applied
 
 const match = () => {
   const selected = document.querySelectorAll('.selected')
@@ -118,3 +101,49 @@ const match = () => {
     card.classList.add('match')
   })
 }
+
+// to reset the count of clicks to allow for the other matches to be selected
+
+let resetClicks = () => {
+  firstClick = ''
+  secondClick = ''
+  count = 0
+  alreadyMatched = null
+
+  let selected = document.querySelectorAll('.selected')
+  selected.forEach((card) => {
+    card.classList.remove('selected')
+  })
+}
+
+// setting when a card is clicked and if the values are equal to run the match function
+
+game.addEventListener('click', function (event) {
+  const clicked = event.target
+  if (clicked.nodeName === 'SECTION' || clicked === alreadyMatched ) {
+    return
+  }
+  if (count < 2) {
+    count++
+    if (count === 1) {
+      firstClick = clicked.dataset.name
+      clicked.parentNode.classList.add('selected')
+    } else {
+      secondClick = clicked.parentNode.dataset.name
+      clicked.parentNode.classList.add('selected')
+    }
+    if (firstClick !== '' && secondClick !== '') {
+      if (firstClick === secondClick) {
+        setTimeout(match, delay)
+      }
+      setTimeout(resetClicks, delay)
+    }
+    alreadyMatched = clicked
+  }
+})
+
+let count = 0
+let firstClick = ''
+let secondClick = ''
+let alreadyMatched = null
+const delay = 1200

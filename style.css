@@ -2,44 +2,82 @@
 box-sizing: border-box;
 margin: 0;
 padding: 0;
-font-family: monospace;
+font-family: 'Alegreya Sans SC', sans-serif;
 }
 
 h1{
     text-align: center;
     margin-top: 15px;
     margin-bottom: 15px;
-    font-size: 7rem;
+    font-size: 6.4rem;
+}
+
+.restart{
+    padding: 5px;
+    border: paleturquoise 5px solid;
+    border-radius: 10px;
+    margin-left: 40%;
+    margin-bottom: 15px;
 }
 
 .game{
-    background-color: rgb(241, 174, 119);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: rgb(65, 187, 92);
+    /* background-image: url(images/grass.png); */
 }
 
 .card{
     display: inline-block;
-    flex-wrap: wrap;
     text-align: center;
-    padding: 25px;
-    font-size: 40px;
     height: 100px;
-    width: 20%;
-    margin: 20px;
+    width: 25%;
+    margin: 3rem;
     border-radius: 10px;
     border: 5px solid rgb(255, 252, 62);
     background-color: rgb(241, 239, 239);
-    background-image: ;
+    position: relative;
+    transition: all .4s linear;
+    transform-style: preserve-3d;
   }
 
-  .selected{
-      border: solid 10px rgb(206, 14, 24);
+/* use backface visibility & transform rotateY  */
+  
+.selected{
+      border: solid 10px rgb(255, 0, 0);
       transform: rotateY(180deg);
   }
 
   .match{
       border: rgb(0, 238, 247) solid 10px;
+      background-image: rgb(0,238,247) !important;
   }
-  
 
-/* need to use transform rotateY to flip the cards 
-use active: for when a card is clicked*/
+  .front{
+      z-index: 2;
+      background: url(images/American-Football-Ball-icon.png) no-repeat center / contain
+    
+    }
+  
+    .back{
+        transform: rotateY(180deg);
+        background-color: white;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+  .card,
+  .back,
+  .front{
+      height: 150px;
+      width: 150px;
+  }
+
+.back,
+.front{
+    position: absolute;
+    backface-visibility: hidden;
+}
+
