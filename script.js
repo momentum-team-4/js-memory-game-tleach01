@@ -73,6 +73,12 @@ function shuffle (cardsArray) {
 }
 shuffle(cardsArray)
 
+let count = 0
+let firstClick = ''
+let secondClick = ''
+let alreadyMatched = null
+const delay = 1200
+
 // display cards from array on page
 // added front and back classes for when selected
 
@@ -95,9 +101,9 @@ cardsArray.forEach((item) => {
 
 // when cards match to put a class of match on so the correct css is applied
 
-const match = () => {
+const match = function match () {
   const selected = document.querySelectorAll('.selected')
-  selected.forEach((card) => {
+  selected.forEach(function (card) {
     card.classList.add('match')
   })
 }
@@ -120,13 +126,17 @@ let resetClicks = () => {
 
 game.addEventListener('click', function (event) {
   const clicked = event.target
-  if (clicked.nodeName === 'SECTION' || clicked === alreadyMatched ) {
+  if (clicked.nodeName === 'SECTION' ||
+   clicked === alreadyMatched ||
+   clicked.parentNode.classList.contains('selected') ||
+   clicked.parentNode.classList.contains('match')) {
     return
   }
   if (count < 2) {
     count++
     if (count === 1) {
       firstClick = clicked.dataset.name
+
       clicked.parentNode.classList.add('selected')
     } else {
       secondClick = clicked.parentNode.dataset.name
@@ -134,16 +144,10 @@ game.addEventListener('click', function (event) {
     }
     if (firstClick !== '' && secondClick !== '') {
       if (firstClick === secondClick) {
-        setTimeout(match, delay)
+        match()
       }
       setTimeout(resetClicks, delay)
     }
     alreadyMatched = clicked
   }
 })
-
-let count = 0
-let firstClick = ''
-let secondClick = ''
-let alreadyMatched = null
-const delay = 1200

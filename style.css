@@ -56,8 +56,7 @@ h1{
 
   .front{
       z-index: 2;
-      background: url(images/American-Football-Ball-icon.png) no-repeat center / contain
-    
+      background: url(images/American-Football-Ball-icon.png) no-repeat center / contain;
     }
   
     .back{
