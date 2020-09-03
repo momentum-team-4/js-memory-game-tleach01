@@ -4,41 +4,49 @@ margin: 0;
 padding: 0;
 font-family: 'Alegreya Sans SC', sans-serif;
 }
+body{
+    background-color: black;
+}
 
 h1{
     text-align: center;
     margin-top: 15px;
     margin-bottom: 15px;
     font-size: 6.4rem;
+    color: rgb(253, 248, 241);
 }
 
 .restart{
-    padding: 5px;
+    padding: 10px;
     border: paleturquoise 5px solid;
     border-radius: 10px;
     margin-left: 40%;
     margin-bottom: 15px;
+    font-size: 20px;
 }
 
 .game{
+    max-width: 880px;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    background-color: rgb(65, 187, 92);
-    /* background-image: url(images/grass.png); */
+    background-color: rgb(170, 170, 170);
+    
 }
 
 .card{
     display: inline-block;
-    text-align: center;
-    height: 100px;
+    height: 125px;
     width: 25%;
-    margin: 3rem;
+    margin: 30px;
+    box-shadow: 0 4px 8px gray;
     border-radius: 10px;
-    border: 5px solid rgb(255, 252, 62);
+    border: 10px solid rgb(4, 107, 0);
     background-color: rgb(241, 239, 239);
     position: relative;
     transition: all .4s linear;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
   }
 
@@ -52,19 +60,25 @@ h1{
   .match{
       border: rgb(0, 238, 247) solid 10px;
       background-image: rgb(0,238,247) !important;
+      visibility: hidden;
   }
 
   .front{
       z-index: 2;
-      background: url(images/American-Football-Ball-icon.png) no-repeat center / contain;
+      background: 
+      url(images/American-Football-Ball-icon.png);
+      background-size:  contain;
+      background-position:  center;
+      background-repeat: no-repeat;
+      
     }
   
     .back{
         transform: rotateY(180deg);
-        background-color: white;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
+        box-shadow: 0 4px 8px gray;
     }
 
   .card,
@@ -77,6 +91,6 @@ h1{
 .back,
 .front{
     position: absolute;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
-

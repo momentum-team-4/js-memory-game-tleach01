@@ -77,7 +77,7 @@ let count = 0
 let firstClick = ''
 let secondClick = ''
 let alreadyMatched = null
-const delay = 1200
+const delay = 1800
 
 // display cards from array on page
 // added front and back classes for when selected
@@ -103,6 +103,7 @@ cardsArray.forEach((item) => {
 
 const match = function match () {
   const selected = document.querySelectorAll('.selected')
+  console.log('match is working')
   selected.forEach(function (card) {
     card.classList.add('match')
   })
@@ -135,7 +136,7 @@ game.addEventListener('click', function (event) {
   if (count < 2) {
     count++
     if (count === 1) {
-      firstClick = clicked.dataset.name
+      firstClick = clicked.parentNode.dataset.name
 
       clicked.parentNode.classList.add('selected')
     } else {
@@ -144,7 +145,7 @@ game.addEventListener('click', function (event) {
     }
     if (firstClick !== '' && secondClick !== '') {
       if (firstClick === secondClick) {
-        match()
+        setTimeout(match, delay)
       }
       setTimeout(resetClicks, delay)
     }
